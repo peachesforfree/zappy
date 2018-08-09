@@ -27,7 +27,7 @@ int     main(int argc, char **argv)
         printf("reading flags\n");
         server_usage();
         return (0);
-    }
+    } 
     print_flags(&env);
     return (0);
 }
