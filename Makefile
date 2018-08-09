@@ -2,7 +2,7 @@ SRV = server
 LIB = libft.a
 #LIBDEBUG = ""
 CFLAGS += -Wall -Werror -Wextra
-INCLUDES = -I inc/ #-I lib/inc/
+INCLUDES = -I./inc #-I lib/inc/
 #LINK = -L lib/ -l ft
 CC = gcc
 
@@ -57,8 +57,7 @@ OBJSRC += $(patsubst %, %.o, $(addprefix $(addprefix $(SRCDIR), $(SRCDIR_UTIL)),
 
 SRC_SRV = server
 
-SRC_UTIL = constructor \
-			read_flags
+SRC_UTIL = read_flags
 
 # SRC_BRD = \
 # 	board \
@@ -152,8 +151,13 @@ $(LIB):
 
 #$(LIBDEBUG):
 #	make debug -C lib/
-$(OBJSRC): $(OBJSRC:%.o=%.c)
+%.o: %.c
+	@ echo "$(YELLOW)Compiling $<...$(RES)"
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+# $(OBJSRC): $(OBJSRC:%.o=%.c)
+# 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+# 	echo $(OBJSRC)
 
 #$(OBJ_DIR)%.o:$(SRC_DIR)%.c
 #	gcc -g -Wall -Werror -Wextra -c -I $(LIBFT_DIR)libft.h -I includes  -o $@ -c $<
