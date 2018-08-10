@@ -19,9 +19,9 @@ OBJSRC += $(patsubst %, %.o, $(addprefix $(addprefix $(SRCDIR), $(SRCDIR_UTIL)),
 # SOURCE FILES                                                                 #
 ################################################################################
 
-SRC_CLN = server
+SRC_CLN = client
 
-SRC_UTIL = read_flags
+SRC_UTIL = util
 
 ################################################################################
 # SOURCE FILES                                                                 #
@@ -29,11 +29,10 @@ SRC_UTIL = read_flags
 
 all: $(CLIENT)
 
-$(SRV): $(OBJSRC)
+$(CLIENT): $(OBJSRC)
 	$(CC) $(CFLAGS) $(INCLUDES) $(OBJSRC) -o $(CLIENT) 
 
 %.o: %.c
-	@ echo "$(YELLOW)Compiling $<...$(RES)"
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:

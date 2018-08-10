@@ -1,5 +1,4 @@
 #include "util.h"
-#include "data_structure.h"
 
 //  Usage: ./client -n <team> -p <port> [-h <hostname>]
 //      -n team\_name
@@ -25,7 +24,7 @@ int     flag_check(t_env *env)
         printf("Please state a team neame\n");
         return (0);
     }    
-    if (port == 0)
+    if (env->port == 0)
     {
         printf("Please state a port number\n");
         return (0);
@@ -41,7 +40,7 @@ int     read_flags(int argc, char **argv, t_env *env)
     int m;
 
     i = 1;
-    while (argv[1])
+    while (argv[i])
     {
         m = 0;
         while (m < 3)
