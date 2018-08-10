@@ -16,7 +16,9 @@ int     print_usage(void)
 
 int     main(int argc, char **argv)
 {
-    if (argc < 5 || !read_flags(argc, argv))
+    t_env env;
+
+    if (argc < 5 || !read_flags(argc, argv, &env))
         return (print_usage());
 
     return (0);

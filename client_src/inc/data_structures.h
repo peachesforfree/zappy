@@ -1,6 +1,11 @@
 #ifndef DATA_STRUCTURES_H
 # define DATA_STRUCTURES_H
 
-//need to make data strure for client communication
+typedef struct      s_env
+{
+    char            *hostname;
+    char            *team_name;
+    int             port;
+}                   t_env;
 
 #endif
