@@ -6,6 +6,41 @@ import pygame
 from pygame.locals import *
 import sys
 
+
+verticies = (
+    (1, -1, -1),
+    (1, 1, -1),
+    (-1, 1, -1),
+    (-1, -1, -1),
+    (1, -1, 1),
+    (1, 1, 1),
+    (-1, -1, 1),
+    (-1, 1, 1)
+    )
+
+edges = (
+    (0,1),
+    (0,3),
+    (0,4),
+    (2,1),
+    (2,3),
+    (2,7),
+    (6,3),
+    (6,4),
+    (6,7),
+    (5,1),
+    (5,4),
+    (5,7)
+    )
+
+
+def Cube():
+    glBegin(GL_LINES)
+    for edge in edges:
+        for vertex in edge:
+            glVertex3fv(verticies[vertex])
+    glEnd()
+
 #def game_loop:
 #   while still connected to server
 #       parse commands into queue
@@ -31,15 +66,19 @@ class Game:
     game_speed = 0
     #direction speed, how fast to move foreward
     direction_speed = 2
+    
+    trans_x = 0
+    trans_y = 0
+    trans_z = 0
     def __init__(self, bx, by, sp):
         self.board_x = bx
         self.board_y = by
         self.game_speed = sp
     
-    def Translate(x, y, z):
-        trans_x = x
-        trans_y = y
-        trans_z = z
+    def Translate(self, x, y, z):
+        self.trans_x = x
+        self.trans_y = y
+        self.trans_z = z
 
 def Keyboard_Event(game, event):
     if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
@@ -77,6 +116,7 @@ class Window:
     max_distance = 100
     window_x = 0
     window_y = 0
+
     def __init__(self, game, win_x = 800, win_y = 600):
         pygame.init()
         self.window_x = win_x
@@ -90,7 +130,7 @@ def init_game(x, y, speed):
     connected = False
     game = Game(x, y, 5)
     window = Window(game, 1600, 1200)
-
+    glTranslatef(0.0,0.0, -5)
 
     #BEWLOW: User input, clicks, buttons, and typing
     while True:
@@ -110,10 +150,11 @@ def init_game(x, y, speed):
 
 
     #Below: Rendering logic and object manipulation
-    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
-    glTranslatef(game.Translate.trans_x, game.Translate.trans_y, game.Translate.trans_z)
-    
-    pygame.display.flip()
+        glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
+
+        Cube()
+
+        pygame.display.flip()
 
 
 
