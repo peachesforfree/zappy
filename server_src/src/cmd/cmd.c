@@ -27,7 +27,5 @@ t_cmd	g_cmd[] =
 	{"fork", 42, cmd_fork},
 	{"connect_nbr", 0, cmd_connect_nbr},
 	//{"", 7, cmd_advance},// deadth -> clear out the queue and FD_CLR fd_sets;
-
+	{NULL, 0, NULL},
 }
-
-
