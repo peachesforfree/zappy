@@ -4,10 +4,9 @@
 /*
  *world width and height - stored in t_map map
  * team names - stored in team_stats
- * clients authorized - 
- * 
+ * clients authorized -
+ *
 */
-
 
 
 
@@ -30,17 +29,24 @@ typedef struct      s_players
     t_team   *team;
     int             food;
     int             level;
+	int				fd;
+	int				direction;	// sding added it --> 0: N, 1: E, 2: S, 3: W
+	int				y;			// sding added it
+	int				x;			// sding added it
+	int				request_nb; // sding added it
+	int				inventory[7]; // sding added it
 }                   t_players;
 
 typedef struct          s_cell
 {
-    int                 linemate;
-    int                 deraumere;
-    int                 sibur;
-    int                 mendiane;
-    int                 phiras;
-    int                 thystame;
-    t_players    **players;
+    // int                 linemate;
+    // int                 deraumere;
+    // int                 sibur;
+    // int                 mendiane;
+    // int                 phiras;
+    // int                 thystame;
+	int			resource[7];
+	t_players	**players;
 }                       t_cell;
 
 typedef struct      s_map
@@ -57,8 +63,10 @@ typedef struct          s_env
     int                 authorized_clients;
     int                 time_unit;
     t_map               map;
-    t_players    *players;
-    t_team       *teams;
+    t_players			*players;
+    t_team				*teams;
+	t_queue				*queue; // sding added it
+	char				buffer[4096]; // sding added it
 }                       t_env;
 
 #endif
