@@ -23,6 +23,35 @@
 **  10 + nb -t time unit divider (the greater t is, the faster the game will go)
 */
 
+/*
+** generate resource by randomize the map[y][x][res];
+** method:
+**  1. increase res 0 ~ 6 
+**  2. while loop (fixed number of set) square root of map_x
+**  3. while loop (fixed width + height times)
+*/
+
+void    generate_resource(void)
+{
+    int res;
+    int count;
+
+    res = 0;
+    count = (int)sqrt(g_env.map_x) * (g_env.map_x + g_env.map_y);
+    while (count-- > 0)
+        while (res < 7)
+            g_env.map[rand() % g_env.map_y][rand() % g_env.map_x][res++]++;
+}
+
+
+void    game_loop()
+{
+    generate_resource();
+    //server_client(); // this will be a select loop
+
+    // free struct(); // include t_team 
+}
+
 void    server_usage(void)
 {
     printf("Usage: ./server -p <port> -x <width> -y <height> \
@@ -45,6 +74,7 @@ int     main(int argc, char **argv)
         server_usage();
         return (0);
     }
+    game_loop();
     print_flags(&g_env);
     print_team(g_env.teams);
     return (0);

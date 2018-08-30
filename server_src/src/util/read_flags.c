@@ -30,9 +30,9 @@ int    set_value(char **flag, int i, int m, t_env *env)
     if (m == 0)
         env->port = number;
     if (m == 1)
-        env->map.x = number;
+        env->map_x = number;
     if (m == 2)
-        env->map.y = number;
+        env->map_y = number;
     if (m == 3)
         env->teams = team_init(flag, i + 1, nb_team);
     if (m == 4)
@@ -80,7 +80,7 @@ void    print_flags(t_env *env)
     temp = env->teams;
     printf(LIGHTBLUE"[print flag]\n\n"RESET);
     printf("-p Port:%d\n", env->port);
-    printf("-x width:%d\n-y height:%d\n", env->map.x, env->map.y);
+    printf("-x width:%d\n-y height:%d\n", env->map_x, env->map_y);
     while (temp != NULL)
     {
         printf("-n Teams:%s\n", temp->team_name);
